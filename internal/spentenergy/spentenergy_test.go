@@ -256,7 +256,7 @@ func (suite *SpentCaloriesTestSuite) TestRunningSpentCalories() {
 
 	for _, tt := range tests {
 		suite.Run(tt.name, func() {
-			gotCal, gotErr := RunningSpentCalories(tt.steps, tt.weight, tt.height, tt.duration)
+			gotCal := RunningSpentCalories(tt.steps, tt.weight, tt.height, tt.duration)
 
 			if tt.wantErr {
 				require.Error(suite.T(), gotErr, "Для тестового случая %q (шаги: %d, вес: %.1f, рост: %.2f, продолжительность: %v) ожидалась ошибка, но её нет",
