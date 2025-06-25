@@ -2,11 +2,12 @@ package daysteps
 
 import (
 	"fmt"
-	"github.com/Yandex-Practicum/tracker/internal/personaldata"
-	energy "github.com/Yandex-Practicum/tracker/internal/spentenergy"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/Yandex-Practicum/tracker/internal/personaldata"
+	energy "github.com/Yandex-Practicum/tracker/internal/spentenergy"
 )
 
 type DaySteps struct {
@@ -21,11 +22,11 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 	//"678,0h50m"
 	slice := strings.Split(datastring, ",")
 	if len(slice) != 2 {
-		return fmt.Errorf("length of data is not 2")
+		return err
 	}
 	ds.Steps, err = strconv.Atoi(slice[0])
 	if err != nil {
-		return fmt.Errorf("error in convert string to int")
+		return err
 	}
 	if ds.Steps <= 0 {
 		return fmt.Errorf("wrong number of steps")
@@ -33,7 +34,7 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 
 	ds.Duration, err = time.ParseDuration(slice[1])
 	if err != nil {
-		return fmt.Errorf("error in convert string to duration")
+		return err
 	}
 	if ds.Duration <= 0 {
 		return fmt.Errorf("invalid duration value")
