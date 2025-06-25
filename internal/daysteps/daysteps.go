@@ -22,7 +22,7 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 	//"678,0h50m"
 	slice := strings.Split(datastring, ",")
 	if len(slice) != 2 {
-		return err
+		return fmt.Errorf("err in split")
 	}
 	ds.Steps, err = strconv.Atoi(slice[0])
 	if err != nil {
